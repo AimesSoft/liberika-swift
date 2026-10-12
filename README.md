@@ -1,6 +1,6 @@
-# Erika for Swift
+# liberika for Swift
 
-Native Swift SDK for the [Erika](https://github.com/AimesSoft/Erika) media
+Native Swift SDK for the [liberika](https://github.com/AimesSoft/liberika) media
 engine. It provides a Swift API and Metal-backed views for macOS, iOS, and
 tvOS. The prebuilt native runtime is downloaded automatically by Swift Package
 Manager; applications do not need Rust, FFmpeg, CocoaPods, or Flutter.
@@ -75,11 +75,11 @@ position, buffering, track, decoder, and output changes.
 - composited RGBA frame capture
 - UIKit, AppKit, and SwiftUI video views
 
-The lower-level `invoke(_:arguments:)` API exposes new Erika presenter commands
+The lower-level `invoke(_:arguments:)` API exposes new liberika presenter commands
 without requiring an immediate Swift wrapper update.
 
 ## License
 
-The Swift wrapper is available under MPL-2.0. The binary target includes Erika
+The Swift wrapper is available under MPL-2.0. The binary target includes liberika
 and statically linked native dependencies; see `THIRD_PARTY_NOTICES.md` and the
-Erika release notices for their licenses.
+liberika release notices for their licenses.

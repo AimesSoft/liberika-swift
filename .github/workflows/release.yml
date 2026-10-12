@@ -6,15 +6,15 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: Erika version to release
+        description: liberika version to release
         required: true
         type: string
       checksum:
-        description: SwiftPM checksum for the Erika binary archive
+        description: SwiftPM checksum for the liberika binary archive
         required: true
         type: string
       source_tag:
-        description: Erika source release tag
+        description: liberika source release tag
         required: true
         type: string
 
@@ -49,16 +49,16 @@ jobs:
           [[ "$CHECKSUM" =~ ^[0-9a-f]{64}$ ]]
           [[ "$SOURCE_TAG" == "v$VERSION" ]]
           curl --fail --silent --show-error --location --head \
-            "https://github.com/AimesSoft/Erika/releases/download/${SOURCE_TAG}/erika-swift-core-${VERSION}.xcframework.zip" \
+            "https://github.com/AimesSoft/liberika/releases/download/${SOURCE_TAG}/erika-swift-core-${VERSION}.xcframework.zip" \
             > /dev/null
 
       - name: Update the SwiftPM binary target
         shell: bash
         run: |
           set -euo pipefail
-          archive_url="https://github.com/AimesSoft/Erika/releases/download/v${VERSION}/erika-swift-core-${VERSION}.xcframework.zip"
+          archive_url="https://github.com/AimesSoft/liberika/releases/download/v${VERSION}/erika-swift-core-${VERSION}.xcframework.zip"
           sed -i '' -E \
-            "s#url: \"https://github.com/AimesSoft/Erika/releases/download/v[0-9.]+/erika-swift-core-[0-9.]+\\.xcframework\\.zip\"#url: \"${archive_url}\"#" \
+            "s#url: \"https://github.com/AimesSoft/(Erika|liberika)/releases/download/v[0-9.]+/erika-swift-core-[0-9.]+\\.xcframework\\.zip\"#url: \"${archive_url}\"#" \
             Package.swift
           sed -i '' -E \
             "s/(checksum: \")[0-9a-f]+(\")/\\1${CHECKSUM}\\2/" \
@@ -103,7 +103,7 @@ jobs:
           notes="$RUNNER_TEMP/release-notes.md"
           printf '%s\n\n' "Erika Swift SDK v${VERSION}" > "$notes"
           printf '%s\n' \
-            "- 更新 Erika 核心二进制到 v${VERSION}" \
+            "- 更新 liberika 核心二进制到 v${VERSION}" \
             "- 支持 macOS、iOS 和 tvOS 的 SwiftPM 集成" \
             "- 提供 UIKit、AppKit 和 SwiftUI 播放视图" \
             "- SwiftPM checksum: \`${CHECKSUM}\`" >> "$notes"

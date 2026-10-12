@@ -15,7 +15,7 @@ liberika 的 macOS、iOS 和 tvOS 原生 Swift SDK。Swift Package Manager 会�
 在 Xcode 中选择 **File > Add Package Dependencies**，输入：
 
 ```text
-https://github.com/AimesSoft/ErikaSwift
+https://github.com/AimesSoft/liberika-swift
 ```
 
 选择 `0.1.8` 或更高版本，并把 `Erika` product 加入应用 target。

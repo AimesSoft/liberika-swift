@@ -17,7 +17,7 @@ Manager; applications do not need Rust, FFmpeg, CocoaPods, or Flutter.
 In Xcode, choose **File > Add Package Dependencies** and enter:
 
 ```text
-https://github.com/AimesSoft/ErikaSwift
+https://github.com/AimesSoft/liberika-swift
 ```
 
 Select version `0.1.8` or later and add the `Erika` product to your target.

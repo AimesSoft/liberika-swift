@@ -18,7 +18,7 @@ liberika 的 macOS、iOS 和 tvOS 原生 Swift SDK。Swift Package Manager 会�
 https://github.com/AimesSoft/liberika-swift
 ```
 
-选择 `0.1.8` 或更高版本，并把 `Erika` product 加入应用 target。
+选择 `0.3.0` 或更高版本，并把 `Erika` product 加入应用 target。
 
 ## 使用
 
@@ -44,4 +44,4 @@ ArtCNN 放大、解码器/输出/资源统计和 RGBA 截图。`ErikaPlayer` 需
 ## 许可证
 
 Swift 封装使用 MPL-2.0。预编译二进制包含 liberika 及静态链接的原生依赖，详情见
-`THIRD_PARTY_NOTICES.md` 和 liberika `v0.1.8` Release 内的许可证文件。
+`THIRD_PARTY_NOTICES.md` 和 liberika `v0.3.0` Release 内的许可证文件。

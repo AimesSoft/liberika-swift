@@ -56,6 +56,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          previous_version="$(sed -nE 's#.*releases/download/v([0-9.]+)/erika-swift-core-.*#\1#p' Package.swift)"
+          [[ "$previous_version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
           archive_url="https://github.com/AimesSoft/liberika/releases/download/v${VERSION}/erika-swift-core-${VERSION}.xcframework.zip"
           sed -i '' -E \
             "s#url: \"https://github.com/AimesSoft/(Erika|liberika)/releases/download/v[0-9.]+/erika-swift-core-[0-9.]+\\.xcframework\\.zip\"#url: \"${archive_url}\"#" \
@@ -63,12 +65,15 @@ jobs:
           sed -i '' -E \
             "s/(checksum: \")[0-9a-f]+(\")/\\1${CHECKSUM}\\2/" \
             Package.swift
-          # Keep user-facing release links and examples aligned with the SDK tag.
-          for file in README.md README.zh.md THIRD_PARTY_NOTICES.md Examples/Player/README.md; do
-            if grep -q '0\.1\.7' "$file"; then
-              sed -i '' "s/0\\.1\\.7/${VERSION}/g" "$file"
-            fi
-          done
+          # Sync docs from the package's actual previous version on every release.
+          PREVIOUS_VERSION="$previous_version" python3 - <<'PYTHON'
+          import os
+          from pathlib import Path
+
+          for name in ["README.md", "README.zh.md", "THIRD_PARTY_NOTICES.md", "Examples/Player/README.md"]:
+              path = Path(name)
+              path.write_text(path.read_text().replace(os.environ["PREVIOUS_VERSION"], os.environ["VERSION"]))
+          PYTHON
           grep -Fq "${CHECKSUM}" Package.swift
           grep -Fq "erika-swift-core-${VERSION}.xcframework.zip" Package.swift
 

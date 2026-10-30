@@ -1,3 +1,5 @@
+[中文](README.zh.md) | English | [日本語](README.ja.md)
+
 # liberika for Swift
 
 Native Swift SDK for the [liberika](https://github.com/AimesSoft/liberika) media

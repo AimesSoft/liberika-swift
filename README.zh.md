@@ -19,7 +19,7 @@
 https://github.com/AimesSoft/liberika-swift
 ```
 
-选择 `0.3.0` 或更高版本，并将 `Erika` product 加入应用 target。
+选择 `0.3.2` 或更高版本，并将 `Erika` product 加入应用 target。
 
 ## UIKit / AppKit
 

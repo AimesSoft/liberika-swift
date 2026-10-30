@@ -22,7 +22,7 @@ In Xcode, choose **File > Add Package Dependencies** and enter:
 https://github.com/AimesSoft/liberika-swift
 ```
 
-Select version `0.3.0` or later and add the `Erika` product to your target.
+Select version `0.3.2` or later and add the `Erika` product to your target.
 
 ## UIKit / AppKit
 

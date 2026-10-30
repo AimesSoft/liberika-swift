@@ -38,12 +38,13 @@ func openNative(_ handle: OpaquePointer, source: String, options: ErikaOpenOptio
     }
     try withOptionalCString(source) { uri in
         try headers.withUnsafeBufferPointer { buffer in
-            var native = CErika.ErikaOpenOptions(
-                headers: buffer.baseAddress, header_count: UInt(buffer.count),
-                http_read_ahead_bytes: options.httpReadAheadBytes,
-                http_back_buffer_bytes: options.httpBackBufferBytes,
-                reserved: (0, 0)
-            )
+            // C's zero initializer preserves forward compatibility when a reserved
+            // field becomes a named option, as in the 0.3.1 runtime headers.
+            var native = CErika.ErikaOpenOptions()
+            native.headers = buffer.baseAddress
+            native.header_count = UInt(buffer.count)
+            native.http_read_ahead_bytes = options.httpReadAheadBytes
+            native.http_back_buffer_bytes = options.httpBackBufferBytes
             try erikaCheck(erika_presenter_open_with_options(handle, uri, &native))
         }
     }

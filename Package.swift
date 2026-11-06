@@ -39,6 +39,6 @@ let package = Package(
                 .linkedLibrary("z"),
             ]
         ),
-        .testTarget(name: "ErikaTests", dependencies: ["Erika"]),
+        .testTarget(name: "ErikaTests", dependencies: ["Erika", "CErika"]),
     ]
 )

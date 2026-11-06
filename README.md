@@ -62,7 +62,8 @@ struct PlayerScreen: View {
 ```
 
 Create and use `ErikaPlayer` on the main actor. Poll `pollEvent()` for playback,
-position, buffering, track, decoder, and output changes.
+position, buffering, track, decoder, and output changes. `.ended` follows the
+stopped state after natural completion; an explicit stop does not emit it.
 
 ## Available APIs
 
@@ -72,12 +73,20 @@ position, buffering, track, decoder, and output changes.
 - external subtitles, subtitle scaling/style, and in-memory font registration
 - Bilibili XML / JSON danmaku tracks, offsets, filtering, and layout configuration
 - SDR, Apple EDR, extended-linear, and automatic output modes
-- packed-alpha video output and ArtCNN luma upscaling modes
+- packed-alpha output and ArtCNN, Anime4K, FSR 1.0, platform video, MetalFX, and custom upscaling modes
 - playback, decoder, output, upscaler, and resource statistics
 - composited RGBA frame capture
 - UIKit, AppKit, and SwiftUI video views
 
-The lower-level `invoke(_:arguments:)` API exposes new liberika presenter commands
+`ErikaUpscaler` selects the same numeric modes as the native SDK. Availability
+depends on the platform, input and device; inspect `upscalerStatus()` for the
+active backend and fallback. For a custom model, first call
+`invoke("loadUpscalerModelFile", arguments: ["path": modelPath])`, then select
+`.custom` with `setUpscaler`. The host must supply the `.esr` file or supported
+FSRCNNX / Anime4K CNN mpv hook shader; external model weights are not bundled.
+Use `invoke("clearUpscalerModel")` to unload it.
+
+The lower-level `invoke(_:arguments:)` API also exposes other presenter commands
 without requiring an immediate Swift wrapper update.
 
 ## License

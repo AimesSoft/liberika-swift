@@ -14,7 +14,7 @@ final class PlayerController {
     func start() throws {
         try player.open(
             "https://example.com/video.m3u8",
-            httpHeaders: ["User-Agent": "ErikaSwift/0.3.3"]
+            httpHeaders: ["User-Agent": "ErikaSwift/0.3.4"]
         )
         try player.play()
     }

@@ -57,7 +57,7 @@ struct PlayerScreen: View {
 }
 ```
 
-在主 actor 上创建和使用 `ErikaPlayer`。调用 `pollEvent()` 获取播放、位置、缓冲、轨道、解码器和输出变化。
+在主 actor 上创建和使用 `ErikaPlayer`。调用 `pollEvent()` 获取播放、位置、缓冲、轨道、解码器和输出变化。自然播完时 `.ended` 跟在 stopped 状态之后；主动停止不会触发该事件。
 
 ## 可用 API
 
@@ -67,12 +67,14 @@ struct PlayerScreen: View {
 - 外挂字幕、字幕缩放与样式、内存字体注册
 - Bilibili XML / JSON 弹幕轨道、偏移、过滤和布局配置
 - SDR、Apple EDR、extended-linear 和自动输出模式
-- packed-alpha 视频输出和 ArtCNN 亮度超分模式
+- packed-alpha 视频输出，以及 ArtCNN、Anime4K、FSR 1.0、平台视频超分、MetalFX 和自定义超分模式
 - 播放、解码器、输出、放大器和资源统计
 - 捕获合成后的 RGBA 帧
 - UIKit、AppKit 和 SwiftUI 视频视图
 
-较低层的 `invoke(_:arguments:)` API 可以访问新的 liberika presenter 命令，无需立即更新 Swift 封装。
+`ErikaUpscaler` 对应原生 SDK 的模式值。实际可用性取决于平台、输入和设备；可用 `upscalerStatus()` 检查当前后端和回退。使用自定义模型时，先调用 `invoke("loadUpscalerModelFile", arguments: ["path": modelPath])`，再通过 `setUpscaler` 选择 `.custom`。`.esr` 文件或受支持的 FSRCNNX / Anime4K CNN mpv hook shader 由宿主提供，外部模型权重不随库分发；调用 `invoke("clearUpscalerModel")` 卸载。
+
+较低层的 `invoke(_:arguments:)` API 也可以访问其他 presenter 命令，无需立即更新 Swift 封装。
 
 ## 许可证
 

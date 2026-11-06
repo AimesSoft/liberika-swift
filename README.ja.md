@@ -57,7 +57,7 @@ struct PlayerScreen: View {
 }
 ```
 
-`ErikaPlayer` はメインアクターで作成・使用します。`pollEvent()` で再生、位置、バッファリング、トラック、デコーダー、出力の変更を取得します。
+`ErikaPlayer` はメインアクターで作成・使用します。`pollEvent()` で再生、位置、バッファリング、トラック、デコーダー、出力の変更を取得します。自然終了時には stopped 状態の後に `.ended` が届きます。明示的な停止では発行されません。
 
 ## 利用可能な API
 
@@ -67,12 +67,14 @@ struct PlayerScreen: View {
 - 外部字幕、字幕の拡大率とスタイル、メモリ上のフォント登録
 - Bilibili XML / JSON の弾幕トラック、オフセット、フィルタリング、配置設定
 - SDR、Apple EDR、extended-linear、自動出力モード
-- packed-alpha 映像出力と ArtCNN 輝度超解像モード
+- packed-alpha 映像出力と ArtCNN、Anime4K、FSR 1.0、プラットフォーム動画超解像、MetalFX、カスタム超解像モード
 - 再生、デコーダー、出力、アップスケーラー、リソースの統計
 - 合成済み RGBA フレームのキャプチャ
 - UIKit、AppKit、SwiftUI の動画ビュー
 
-低レベルの `invoke(_:arguments:)` API を使うと、Swift ラッパーの更新を待たずに新しい liberika presenter コマンドにアクセスできます。
+`ErikaUpscaler` はネイティブ SDK のモード値に対応します。利用可否はプラットフォーム、入力、デバイスによって異なります。`upscalerStatus()` で実際のバックエンドとフォールバックを確認してください。カスタムモデルはまず `invoke("loadUpscalerModelFile", arguments: ["path": modelPath])` で読み込み、`setUpscaler` で `.custom` を選択します。`.esr` ファイルまたは対応する FSRCNNX / Anime4K CNN 形式の mpv hook shader はホストが用意します。外部モデルの重みは同梱されません。`invoke("clearUpscalerModel")` で解放します。
+
+低レベルの `invoke(_:arguments:)` API は他の presenter コマンドにも利用できます。
 
 ## ライセンス
 

@@ -13,6 +13,24 @@ public enum ErikaUpscaler: Int32, Sendable, CaseIterable {
     case artCNNC4F16 = 1
     case artCNNC4F32 = 2
     case artCNNC4F16DS = 3
+    case artCNNC4F16DN = 4
+    case artCNNC4F32DS = 5
+    case artCNNC4F32DN = 6
+    case artCNNR8F64 = 7
+    case anime4kS = 16
+    case anime4kM = 17
+    case anime4kL = 18
+    case anime4kVL = 19
+    case anime4kUL = 20
+    case anime4kDenoiseS = 21
+    case anime4kDenoiseM = 22
+    case anime4kDenoiseL = 23
+    case anime4kDenoiseVL = 24
+    case anime4kDenoiseUL = 25
+    case fsr1 = 32
+    case platformVideo = 48
+    case metalFXSpatial = 49
+    case custom = 64
 }
 
 public enum ErikaPlaybackState: Int32, Sendable, Codable {
@@ -40,6 +58,8 @@ public enum ErikaEventKind: Int32, Sendable, Codable {
     case trackSelectionChanged = 10
     case videoDecoderChanged = 11
     case audioOutputChanged = 12
+    /// Media reached its natural end after the stopped state; explicit stop does not emit it.
+    case ended = 14
 }
 
 public enum ErikaTrackKind: Int32, Sendable, Codable {

@@ -15,8 +15,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "CErika",
-            url: "https://github.com/AimesSoft/liberika/releases/download/v0.3.7/erika-swift-core-0.3.7.xcframework.zip",
-            checksum: "9d7b21bcb69ca95d9bb55a75becd70c3e55175d2e0cb892e52518941d4c80693"
+            url: "https://github.com/AimesSoft/liberika/releases/download/v0.3.8/erika-swift-core-0.3.8.xcframework.zip",
+            checksum: "5d703473ca8c9dde9c92771e590c73cb5cc0905400da8fd7b7c4e21daf66dae9"
         ),
         .target(
             name: "Erika",
